@@ -3,7 +3,7 @@
 <div id="wrapper">
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <?php echo $alert;?>
+        <div class="alert"><?php echo $alert;?></div>
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Người dùng</h1>
         <a href="<?php echo admin_url('nguoidung/add') ?>" class="btn btn-primary btn-lg" style="margin-bottom: 10px ;">Thêm mới</a>
@@ -71,5 +71,16 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+
+<script>
+    $(document).ready(function(){
+        if($(".alert").length)
+        {
+            $(".alert").ready(function(){
+                $(".alert").delay(2000).fadeOut("fast");
+            });
+        }
+    });
+</script>
 
 </html>

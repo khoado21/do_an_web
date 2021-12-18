@@ -13,6 +13,5 @@
 <!-- Custom styles for this template-->
 <link href="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/css/sb-admin-2.min.css" rel="stylesheet">
 
-
 <!-- Custom styles for table page-->
 <link href="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

@@ -8,6 +8,8 @@ class Cart extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
         $this->load->model('Sanpham_model');
+        $this->load->model('Nguoidung_model');
+        $this->load->model('Donhang_model');
     }
 
     function add()
@@ -99,6 +101,34 @@ class Cart extends MY_Controller
             $this->cart->destroy();
         }
         redirect(base_url('cart'));
+    }
+
+    function CartHistory()
+    {
+        if(!$this->session->userdata('Nguoidung_id_Login'))
+        {
+            redirect(site_url('Nguoidung/login'));
+        }
+        $user_id = $this->session->userdata('Nguoidung_id_Login');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if(!$user)
+        {
+            redirect();
+        }
+
+        $this->data['user'] = $user;
+
+        $input['where'] = array('MANGUOIDUNG' => $user->MANGUOIDUNG);
+        $donhang = $this->Donhang_model->get_list($input);
+
+        $this->data['donhang'] = $donhang;
+
+        //lấy tổng số đơn hàng
+        $total_orders = count((array)$donhang);
+        $this->data['total_orders'] = $total_orders;
+
+        $this->data['temp'] = 'site/cart/CartHistory';
+        $this->load->view('site/layout', $this->data);
     }
 }
 ?>

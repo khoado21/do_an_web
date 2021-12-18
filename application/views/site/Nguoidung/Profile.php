@@ -66,4 +66,5 @@
     <br>
     <a href="<?php echo site_url('Nguoidung/edit') ?>"><button type="submit" class="btn">Sửa thông tin</button></a>
     <a href="<?php echo site_url('Nguoidung/changePassword') ?>"><button type="submit" class="btn">Đổi mật khẩu</button></a>
+    <a href="<?php echo site_url('Cart/CartHistory') ?>"><button type="submit" class="btn">Lịch sử đơn hàng</button></a>
 </div>

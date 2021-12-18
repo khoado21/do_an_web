@@ -146,6 +146,7 @@ class Nguoidung extends MY_Controller
                     }
                     $message = $this->session->flashdata('message');
                     $this->data['message'] = $message;
+                    
                 }
             }
         }
@@ -186,7 +187,62 @@ class Nguoidung extends MY_Controller
 
     function changePassword()
     {
+        if(!$this->session->userdata('Nguoidung_id_Login'))
+        {
+            redirect(admin_url('login'));
+        }
+        //lay thong tin thanh vien
+        $user_id = $this->session->userdata('Nguoidung_id_Login');
+        $user = $this->Nguoidung_model->get_info($user_id);
+
+        if(!$user)
+        {
+            redirect();
+        }
+
+        if ($this->input->post()) {            
+            $this->form_validation->set_rules('PASSWORD', 'Mật khẩu cũ', 'trim|required|min_length[8]');
+            $this->form_validation->set_rules('NEWPASS', 'Mật khẩu mới', 'trim|required|min_length[8]');
+            $this->form_validation->set_rules('NEWPASSCONF', 'Xác nhận mật khẩu mới', 'trim|matches[NEWPASS]');
+
+            if ($this->form_validation->run()) {
+                $PASSWORD = $this->input->post('PASSWORD');
+                $NEWPASS = $this->input->post('NEWPASS');
+                if ($PASSWORD == $user->PASSWORD  && $this->form_validation->run() == TRUE) {
+                    $data = array(
+                        'PASSWORD' => $NEWPASS
+                    );
+                    if ($this->Nguoidung_model->update($user_id, $data)) {
+                        $this->session->set_flashdata('alert', '<div class="alert alert-primary" role="alert">Đổi mật khẩu thành công</div>');
+                        redirect(admin_url('Nguoidung/index'));
+                        // $message = '<div class="alert alert-primary" id="alert" role="alert">Cập nhật dữ liệu thành công</div>';
+                        // $this->success_form['message'] = $message;
+                    } else {
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Đổi mật khẩu không thành công</div>');
+                        // $message = '<div class="alert alert-danger" role="alert">Cập nhật dữ liệu không thành công</div>';
+                        // $this->success_form['message'] = $message;
+                    }
+                } else if ($PASSWORD != $user->PASSWORD) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Xác nhận mật khẩu thất bại</div>');
+                    // $message = '<div class="alert alert-danger" role="alert">Xác nhận mật khẩu thất bại</div>';
+                    // $this->success_form['message'] = $message;
+                }
+                $message = $this->session->flashdata('message');
+                $this->data['message'] = $message;
+            }
+        }
+
         $this->data['temp'] = 'admin/Nguoidung/changePassword';
         $this->load->view('admin/main', $this->data);
+    }
+
+    private function _get_user_info()
+    {
+        $EMAIL = $this->input->post('EMAIL');
+        $PASSWORD = $this->input->post('PASSWORD');
+        
+        $where = array('EMAIL' => $EMAIL, 'PASSWORD' => $PASSWORD);
+        $user = $this->Nguoidung_model->get_info_rule($where);
+        return $user;
     }
 }

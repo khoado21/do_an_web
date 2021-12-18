@@ -21,6 +21,14 @@ class MY_Controller extends CI_Controller
                     //xu ly cac du lieu khi truy cap vao trang admin
                     $this->load->helper('admin');
                     $this->_check_login();
+                    $Admin_id_Login = $this->session->userdata('Admin_id');
+                    $this->data['Admin_id_Login'] = $Admin_id_Login;
+                    if($Admin_id_Login)
+                    {
+                        $this->load->model('Nguoidung_model');
+                        $Admin_info = $this->Nguoidung_model->get_info($Admin_id_Login);
+                        $this->data['Admin_info'] = $Admin_info;
+                    }
                     break;
                 }
             default:
@@ -47,7 +55,6 @@ class MY_Controller extends CI_Controller
                         $this->data['user_info'] = $user_info;
                     }
                     
-
                     $this->load->library('cart');
                     $this->data['total_items'] = $this->cart->total_items();
                 }

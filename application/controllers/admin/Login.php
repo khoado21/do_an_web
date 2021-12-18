@@ -9,6 +9,8 @@ Class Login extends MY_Controller
             $this->form_validation->set_rules('Login','Login','callback_check_login');
             if($this->form_validation->run())
             {
+                $user = $this->_get_user_info();
+                $this->session->set_userdata('Admin_id', $user->MANGUOIDUNG);
                 $this->session->set_userdata('Login', true);
                 redirect(admin_url('home'));
             }
@@ -42,5 +44,16 @@ Class Login extends MY_Controller
             $this->form_validation->set_message(__FUNCTION__, 'Đăng nhập không thành công');
             return false;
         }
+    }
+
+    
+    private function _get_user_info()
+    {
+        $EMAIL = $this->input->post('EMAIL');
+        $PASSWORD = $this->input->post('PASSWORD');
+        
+        $where = array('EMAIL' => $EMAIL, 'PASSWORD' => $PASSWORD);
+        $user = $this->Nguoidung_model->get_info_rule($where);
+        return $user;
     }
 }

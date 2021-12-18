@@ -49,7 +49,7 @@
                         <div class="center">
                         <h3 class="message" style="text-align:center"><?php echo $message ?> </h3>
                         </div>
-                        <br>
+                        <div id="break"><br></div>
                     <?php endif; ?>
 
                 <?php $this->load->view($temp); ?>
@@ -69,5 +69,17 @@
     </div>
 
 </body>
+
+<script>
+    $(document).ready(function(){
+        if($(".message").length)
+        {
+            $(".message").ready(function(){
+                $(".message").delay(2000).fadeOut("fast");
+                $("#break").delay(2000).fadeOut("fast");
+            });
+        }
+    });
+</script>
 
 </html>

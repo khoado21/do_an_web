@@ -113,7 +113,7 @@
                         </td>
                         <td style="width: 140px;">
                             <div class="form-item">
-                                <input class="radio1" type="radio" value="nganluong" name="payment">
+                                <input class="radio1" type="radio" value="nganluong" name="PAYMENT">
                                 <label>Ngân hàng</label>
                                 <div class="clear"></div>
                             </div>
@@ -123,13 +123,14 @@
                         <td></td>
                         <td>
                             <div class="form-item">
-                                <input class="radio2" type="radio" value="tienmat" name="payment">
+                                <input class="radio2" type="radio" value="tienmat" name="PAYMENT">
                                 <label>Tiền mặt</label>
                                 <div class="clear"></div>
                             </div>
                         </td>
                     </tr>
                 </table>
+                <div id="address_error" class="error"><?php echo form_error('PAYMENT') ?></div>
             </div>
 
             <div class="payment_method" id="method1">

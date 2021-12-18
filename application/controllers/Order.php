@@ -4,6 +4,7 @@ Class Order extends MY_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('Sanpham_model');
         $this->load->model('Donhang_model');
         $this->load->model('Ctdh_model');
     }
@@ -99,6 +100,42 @@ Class Order extends MY_Controller
 
         //load view
         $this->data['temp'] = 'site/order/checkout';
+        $this->load->view('site/layout', $this->data);
+    }
+
+    function OrderDetail()
+    {
+        if(!$this->session->userdata('Nguoidung_id_Login'))
+        {
+            redirect(site_url('Nguoidung/login'));
+        }
+        $user_id = $this->session->userdata('Nguoidung_id_Login');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if(!$user)
+        {
+            redirect();
+        }
+
+        //lấy thông tin chi tiết đơn hàng
+        $order_id = $this->uri->rsegment(3);
+        $input['where'] = array('MADONHANG' => $order_id);
+        $list_ctdh = $this->Ctdh_model->get_list($input);
+
+        //lấy thông tin sản phẩm trong chi tiết đơn hàng
+        $ctsp = array();
+        $stt = 0; //số thứ tự sản phẩm
+        foreach($list_ctdh as $list)
+        {
+            $MASP = $list->MASP;
+            $Sanpham = $this->Sanpham_model->get_info($MASP);
+            $list_ctdh[$stt]->TENSP = $Sanpham->TENSP;
+            $list_ctdh[$stt]->HINHANH = $Sanpham->HINHANH;
+            $stt++;
+        }
+        $this->data['list_ctdh'] = $list_ctdh;
+        
+        //load view
+        $this->data['temp'] = 'site/order/OrderDetail';
         $this->load->view('site/layout', $this->data);
     }
 }

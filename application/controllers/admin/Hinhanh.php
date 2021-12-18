@@ -6,6 +6,7 @@ class Hinhanh extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Hinhanh_model');
+        $this->load->model('Sanpham_model');
         $this->load->helper(array('form', 'url'));
     }
     function index()
@@ -39,11 +40,16 @@ class Hinhanh extends MY_Controller
 
     function add()
     {
+        //lấy danh sách sản phẩm
+        $input = array();
+        $sanpham = $this->Sanpham_model->get_list($input);
+
+        $this->data['sanpham'] = $sanpham;
+                 
         if ($this->input->post()) {
 
-            $this->form_validation->set_rules('MASP', 'Mã sản phẩm', 'required');
-           
-            
+            $this->form_validation->set_rules('TENSP', 'Tên sản phẩm', 'required');
+
             if ($this->form_validation->run()) {
                 $this->do_upload();
                 $this->upload->do_upload('HINHANH');
@@ -52,9 +58,14 @@ class Hinhanh extends MY_Controller
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                         Phải có hình ảnh
                     </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 }
-                $MASP = $this->input->post('MASP');
+
+                //trả về mã sản phẩm theo tên sản phẩm
+                $TENSP = $this->input->post('TENSP');
+                $input['TENSP'] = $TENSP;
+                $product = $this->Sanpham_model->get_info_rule($input);
+                $MASP = $product->MASP;
 
                 $data = array(
                     'MASP' => $MASP,
@@ -67,21 +78,21 @@ class Hinhanh extends MY_Controller
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 } else {
                     // $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu không thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 }
                 //chuyển tới trang danh sách quản trị viên
                 // redirect(admin_url('hinhanh/add'));
             }
         }
         // $message = $this->session->flashdata('message');
-        $this->success_form['temp'] = 'admin/hinhanh/add';
-        $this->load->view('admin/main', $this->success_form);
+        $this->data['temp'] = 'admin/hinhanh/add';
+        $this->load->view('admin/main', $this->data);
     }
 
     function edit()
