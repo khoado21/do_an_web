@@ -59,7 +59,7 @@
 
     <!-- Page level custom scripts -->
     <!-- <script src="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/js/demo/chart-area-demo.js"></script> -->
-    <script src="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/js/demo/chart-pie-demo.js"></script> -->
     <!-- Page table level plugins -->
     <script src="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo public_url() ?>admin/startbootstrap-sb-admin-2-master/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -116,7 +116,19 @@
                     pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: [<?php echo $jan = (isset($jan)) ? $jan : 0 ?>, <?php echo $feb = (isset($feb)) ? $feb : 0 ?>, <?php echo $mar = (isset($mar)) ? $mar : 0 ?>, <?php echo $apr = (isset($apr)) ? $apr : 0 ?>, <?php echo $may = (isset($may)) ? $may : 0 ?>, <?php echo $jun = (isset($jun)) ? $jun : 0 ?>, <?php echo $jul = (isset($jul)) ? $jul : 0 ?>, <?php echo $aug = (isset($aug)) ? $aug : 0 ?>, <?php echo $sep = (isset($sep)) ? $sep : 0 ?>, <?php echo $oct = (isset($oct)) ? $oct : 0 ?>, <?php echo $nov = (isset($nov)) ? $nov : 11000 ?>, <?php echo $dec = (isset($dec)) ? $dec : 12000 ?>],
+                    data: [<?php echo $dec = intval($total_jan_amount)?>,
+                        <?php echo $feb = intval($total_feb_amount) ?>,
+                        <?php echo $mar = intval($total_mar_amount) ?>,
+                        <?php echo $apr = intval($total_apr_amount) ?>,
+                        <?php echo $may = intval($total_may_amount) ?>,
+                        <?php echo $jun = intval($total_jun_amount) ?>,
+                        <?php echo $jul = intval($total_jul_amount) ?>,
+                        <?php echo $aug = intval($total_aug_amount) ?>,
+                        <?php echo $sep = intval($total_sep_amount) ?>,
+                        <?php echo $oct = intval($total_oct_amount) ?>,
+                        <?php echo $nov = intval($total_nov_amount) ?>,
+                        <?php echo $dec = intval($total_dec_amount) ?>
+                    ],
                 }],
             },
             options: {
@@ -148,7 +160,7 @@
                             padding: 10,
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
-                                return '$' + number_format(value);
+                                return number_format(value) + 'VND';
                             }
                         },
                         gridLines: {
@@ -180,11 +192,51 @@
                     callbacks: {
                         label: function(tooltipItem, chart) {
                             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                            return datasetLabel + ': ' + number_format(tooltipItem.yLabel) + 'VND';
                         }
                     }
                 }
             }
+        });
+    </script>
+
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        // Pie Chart Example
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Đã thanh toán", "Chưa thanh toán", "Thanh toán thất bại"],
+                datasets: [{
+                    data: [<?php echo $one = isset($dathanhtoan)? number_format($dathanhtoan):0 ?>, 
+                    <?php echo $zero = isset($chuathanhtoan)? number_format($chuathanhtoan):0 ?>, 
+                    <?php echo $two = isset($thatbai)? number_format($thatbai):0 ?>],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
         });
     </script>
 
