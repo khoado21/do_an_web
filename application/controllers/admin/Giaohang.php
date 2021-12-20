@@ -39,7 +39,7 @@ class Giaohang extends MY_Controller{
                     $data = array(
                         'TENNGUOIGIAO' => $this->input->post('TENNGUOIGIAO'),
                         'NGAYGIAO' => $this->input->post('NGAYGIAO'),
-                        'NGAYDAT' => $this->input->post('NGAYDAT'),
+                        'SDT' => $this->input->post('SDT'),
                         'NGAYSHIP' => $this->input->post('NGAYSHIP'),
                     );
                 } else {
@@ -47,7 +47,7 @@ class Giaohang extends MY_Controller{
                         'MAVOUCHER' => $this->input->post('MAVOUCHER'),
                         'TENNGUOIGIAO' => $this->input->post('TENNGUOIGIAO'),
                         'NGAYGIAO' => $this->input->post('NGAYGIAO'),
-                        'NGAYDAT' => $this->input->post('NGAYDAT'),
+                        'SDT' => $this->input->post('SDT'),
                     );
                 }
 

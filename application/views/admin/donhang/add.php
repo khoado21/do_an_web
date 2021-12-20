@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã giao hàng<span style="color:red">*</span></label>
+                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã giao hàng</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="param_PASSWORD" name="MAGIAOHANG">
                             </div>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã người dùng<span style="color:red">*</span></label>
+                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã người dùng</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="param_PASSCONF" name="MANGUOIDUNG">
                             </div>

@@ -37,7 +37,6 @@
                                 <th>Tình trạng thanh toán</th>
                                 <th>Ngày thanh toán</th>
                                 <th>Ngày hết hạn</th>
-                                <th>TransactionID</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -61,7 +60,6 @@
                                 <th>Tình trạng thanh toán</th>
                                 <th>Ngày thanh toán</th>
                                 <th>Ngày hết hạn</th>
-                                <th>TransactionID</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -86,7 +84,6 @@
                                     <td><?php echo $row->TINHTRANGTHANHTOAN ?></td>
                                     <td><?php echo $row->NGAYTHANHTOAN ?></td>
                                     <td><?php echo $row->NGAYHETHAN ?></td>
-                                    <td><?php echo $row->TRANSACTIONID ?></td>
                                     <td>
                                         <span><a href="<?php echo admin_url('donhang/edit/' . $row->MADONHANG) ?>">Edit</a></span>
                                         <span><a onclick="if(confirm('Bạn có chắc muốn xóa dữ liệu?')) commentDelete(1); return false" href="<?php echo admin_url('donhang/delete/' . $row->MADONHANG) ?>">Delete</a></span>

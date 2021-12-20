@@ -9,6 +9,7 @@
         color: red;
     }
 </style>
+
 <div id="wrapper">
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -24,7 +25,7 @@
                     <div class="mb-3 row" style="margin-top: 10px;">
                             <label for="param_HOTEN" class="col-sm-2 col-form-label">Mã đơn hàng<span style="color:red">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" aria-label="Disabled input example" disabled readonly id="param_HOTEN" value="<?php echo $info->MADONHANG; ?>" name="MADONHANG">
+                                <input type="text" class="form-control" aria-label="Disabled input example" readonly id="param_HOTEN" value="<?php echo $info->MADONHANG; ?>" name="MADONHANG">
                             </div>
                             <div class="name_error"><?php echo form_error('MADONHANG'); ?> </div>
                         </div>
@@ -38,7 +39,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã giao hàng<span style="color:red">*</span></label>
+                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã giao hàng</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="param_PASSWORD" name="MAGIAOHANG" value="<?php echo $info->MAGIAOHANG; ?>">
                             </div>
@@ -46,7 +47,7 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã người dùng<span style="color:red">*</span></label>
+                            <label for="param_PASSWORD" class="col-sm-2 col-form-label">Mã người dùng</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="param_PASSCONF" name="MANGUOIDUNG" value="<?php echo $info->MANGUOIDUNG; ?>">
                             </div>
@@ -152,14 +153,6 @@
                                 <input type="date" class="form-control" id="param_TRANGTHAI" name="NGAYHETHAN" value="<?php echo $info->NGAYHETHAN; ?>">
                             </div>
                         </div>
-
-                        <div class="mb-3 row">
-                            <label for="param_TRANGTHAI" class="col-sm-2 col-form-label">TransactionID</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="param_TRANGTHAI" name="TRANSACTIONID" value="<?php echo $info->TRANSACTIONID; ?>">
-                            </div>
-                        </div>
-
 
                         <div class="col text-center">
                             <input type="submit" class="btn btn-primary" value="Update">

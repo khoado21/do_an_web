@@ -9,6 +9,7 @@ class Donhang extends MY_Controller
         $this->load->model('Ctdh_model');
         $this->load->model('Sanpham_model');
     }
+    
     function index()
     {
         $input = array();
@@ -42,8 +43,6 @@ class Donhang extends MY_Controller
     {
 
         if ($this->input->post()) {
-            $this->form_validation->set_rules('MAGIAOHANG', 'Mã giao hàng', 'required');
-            $this->form_validation->set_rules('MANGUOIDUNG', 'Mã người dùng', 'required');
             $this->form_validation->set_rules('SDT', 'Số điện thoại', 'required');
             $this->form_validation->set_rules('HOTEN', 'Họ tên', 'required');
             $this->form_validation->set_rules('DIACHI', 'Địa chỉ', 'required');
@@ -129,17 +128,23 @@ class Donhang extends MY_Controller
             $this->data['info'] = $info;
 
             if ($this->input->post()) {
-                $this->form_validation->set_rules('MAGIAOHANG', 'Mã giao hàng', 'required');
-                $this->form_validation->set_rules('MANGUOIDUNG', 'Mã người dùng', 'required');
                 $this->form_validation->set_rules('SDT', 'Số điện thoại', 'required');
                 $this->form_validation->set_rules('HOTEN', 'Họ tên', 'required');
                 $this->form_validation->set_rules('DIACHI', 'Địa chỉ', 'required');
 
+                if(empty($this->input->post('MAGIAOHANG')))
+                {
+                    $MAGIAOHANG = NULL;
+                }
+                else
+                {
+                    $MAGIAOHANG = $this->input->post('MAGIAOHANG');
+                }
 
                 if ($this->form_validation->run()) {
                     if (empty($this->input->post('MAVOUCHER'))) {
                         $data = array(
-                            'MAGIAOHANG' => $this->input->post('MAGIAOHANG'),
+                            'MAGIAOHANG' =>  $MAGIAOHANG,
                             'MADONHANG' => $this->input->post('MADONHANG'),
                             'NGAYDAT' => $this->input->post('NGAYDAT'),
                             'NGAYSHIP' => $this->input->post('NGAYSHIP'),
@@ -155,7 +160,6 @@ class Donhang extends MY_Controller
                             'TINHTRANGTHANHTOAN' => $this->input->post('TINHTRANGTHANHTOAN'),
                             'NGAYTHANHTOAN' => $this->input->post('NGAYTHANHTOAN'),
                             'NGAYHETHAN' => $this->input->post('NGAYHETHAN'),
-                            'TRANSACTIONID' => $this->input->post('TRANSACTIONID'),
                         );
                     } else {
                         $data = array(
@@ -176,7 +180,6 @@ class Donhang extends MY_Controller
                             'TINHTRANGTHANHTOAN' => $this->input->post('TINHTRANGTHANHTOAN'),
                             'NGAYTHANHTOAN' => $this->input->post('NGAYTHANHTOAN'),
                             'NGAYHETHAN' => $this->input->post('NGAYHETHAN'),
-                            'TRANSACTIONID' => $this->input->post('TRANSACTIONID'),
                         );
                     }
                     if ($this->Donhang_model->update($MADONHANG, $data)) {
