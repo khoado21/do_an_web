@@ -1,12 +1,12 @@
 <div class="box-center">
     <!-- The box-center product-->
     <div class="tittle-box-center">
-        <h2><?php echo $catalog->TENDM ?></h2>
+        <h2>Các sản phẩm linh kiện máy tính</h2>
     </div>
 
     <div class="box-content-center product">
         <!-- The box-content-center -->
-        <?php foreach ($list as $row) : ?>
+        <?php foreach ($sanpham as $row) : ?>
             <div class="product_item">
                 <h3>
                     <a href="<?php echo base_url('sanpham/view/'.$row->MASP) ?>" title="Sản phẩm">
@@ -30,7 +30,7 @@
                 </center> -->
                 <div class="action">
                     <p style="float:left;margin-left:10px">Lượt xem: <b><?php echo $row->LUOTXEM ?></b></p>
-                    <a class="button" href="<?php echo base_url('cart/add/'.$row->MASP) ?>" title="Mua ngay">Mua ngay</a>
+                    <a class="button" href="" title="Mua ngay">Mua ngay</a>
                     <div class="clear"></div>
                 </div>
             </div>

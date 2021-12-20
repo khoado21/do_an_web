@@ -61,21 +61,21 @@ class Contact extends MY_Controller{
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 } else {
                     // $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu không thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 }
                 //chuyển tới trang danh sách quản trị viên
                 //redirect(admin_url('nguoidung/add'));
             }
         }
         // $message = $this->session->flashdata('message');
-        $this->success_form['temp'] = 'admin/Contact/add';
-        $this->load->view('admin/main', $this->success_form);
+        $this->data['temp'] = 'admin/Contact/add';
+        $this->load->view('admin/main', $this->data);
     }
 
     function edit()

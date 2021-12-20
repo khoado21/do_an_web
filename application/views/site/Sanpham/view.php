@@ -27,18 +27,18 @@
 </script>
 
 <!-- zoom image -->
-<script type='text/javascript' src='<?php echo public_url() ?>/site/js/jquery-1.6.js'></script> 
+<script type='text/javascript' src='<?php echo public_url() ?>/site/js/jquery-1.6.js'></script>
 <script src="<?php echo public_url() ?>/site/jqzoom_ev/js/jquery.jqzoom-core.js" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php echo public_url() ?>/site/jqzoom_ev/css/jquery.jqzoom.css" type="text/css">
 <script type="text/javascript">
-$(document).ready(function() {
-  $('.jqzoom').jqzoom({
-            zoomType:'standard',// zoom type
-            lens:true,
-            preloadImages:false,
-            alwaysOn:false
+    $(document).ready(function() {
+        $('.jqzoom').jqzoom({
+            zoomType: 'standard', // zoom type
+            lens: true,
+            preloadImages: false,
+            alwaysOn: false
         });
-});
+    });
 </script>
 
 <!-- end zoom image -->
@@ -96,16 +96,16 @@ $(document).ready(function() {
                             <img src='<?php echo public_url('image/') . $sanpham->HINHANH ?>'>
                         </a>
                     </li>
-                    <?php foreach($image_list as $image): ?>
-                    <?php if($image->LINKANH == ''): ?>
-                        <?php continue; ?>
-                    <?php else: ?>
-                    <li>
-                        <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?php echo public_url('image/') . $image->LINKANH ?>',largeimage: '<?php echo public_url('image/') . $image->LINKANH ?>'}">
-                            <img src='<?php echo public_url('image/') . $image->LINKANH ?>'>
-                        </a>
-                    </li>
-                    <?php endif; ?>
+                    <?php foreach ($image_list as $image) : ?>
+                        <?php if ($image->LINKANH == '') : ?>
+                            <?php continue; ?>
+                        <?php else : ?>
+                            <li>
+                                <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?php echo public_url('image/') . $image->LINKANH ?>',largeimage: '<?php echo public_url('image/') . $image->LINKANH ?>'}">
+                                    <img src='<?php echo public_url('image/') . $image->LINKANH ?>'>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -141,10 +141,9 @@ $(document).ready(function() {
                     Bảo hành: <b><?php echo $sanpham->BAOHANH ?></b>
                 </p>
             <?php endif; ?>
-            
+
             <div class='action'>
-                <a class='button' style='float:left;padding:8px 15px;font-size:16px' href="<?php echo base_url('cart/add/'.$sanpham->MASP) ?>" title='Mua ngay'>Thêm vào giỏ
-                    hàng</a>
+                <a class='button' style='float:left;padding:8px 15px;font-size:16px' href="<?php echo base_url('cart/add/' . $sanpham->MASP) ?>" title='Mua ngay'>Thêm vào giỏ hàng</a>
                 <div class='clear'></div>
             </div>
 
@@ -192,9 +191,6 @@ $(document).ready(function() {
         <ul>
             <li><a title="Chi tiết sản phẩm" rel='tab2' href='javascript:void(0)' class="tab selected">Chi
                     tiết sản phẩm</a></li>
-            <li><a title="Video" rel='tab3' href='javascript:void(0)' class="tab">Video</a></li>
-            <li><a title="Hỏi đáp về sản phẩm" rel='tab4' href='javascript:void(0)' class="tab">Hỏi đáp về
-                    sản phẩm</a></li>
         </ul>
     </div><!-- end  <div class="usual" id="usual1">-->
 
@@ -205,68 +201,9 @@ $(document).ready(function() {
             <!-- comment facebook -->
             <center>
                 <div id="fb-root"></div>
-                <script src="http://connect.facebook.net/en_US/all.js#appId=170796359666689&amp;xfbml=1"></script>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="95Qrdrnh"></script>
                 <div class="fb-comments" data-href="http://localhost/webphp/index.php/san-pham-Tivi-LG-520/9.html" data-num-posts="5" data-width="550" data-colorscheme="light"></div>
             </center>
         </div>
-        <div id="tab3" style="display: none;">
-            <!-- the div chay video -->
-            <div id='mediaspace' style="margin:5px;"></div>
-        </div>
-
-        <div id="tab4" style="display: none;">
-            <div class='box-show-product'>
-                <!-- hiển thị danh sách comment và form comment -->
-                <div class="comments">
-                    <div class="title">
-                        <h3>THẢO LUẬN CỦA KHÁCH HÀNG <span class="yellow">(0)</span></h3>
-                        <h4>Ý kiến khách hàng về Sản phẩm Tivi LG 520</h4>
-                    </div>
-                    <br class="break">
-                    <div class="reviews">
-                        <div class="content">
-                        </div>
-                    </div>
-                </div>
-                <div class='clear'></div>
-
-
-                <style>
-                    .error {
-                        margin: 15px 0px;
-                    }
-                </style>
-                <form name='send_comment' id='show_box_comment' class="t-form form_action" method='post' action='http://localhost/webphp/comment/add.html'>
-                    <table width="90%" cellspacing="0" cellpadding="0" border="0" style="margin:10px auto">
-                        <tbody>
-                            <tr>
-                                <td style='width:210px;padding-right:15px;vertical-align:top'>
-                                    <input type="text" style="width:200px;" class='input' id="user_name" placeholder="Họ tên" value='' name="user_name">
-                                    <div name="user_name_error" class="error"></div>
-                                    <input type="text" style="width:200px;" id="user_email" class='input' placeholder="Email" value='' name="user_email">
-                                    <div name="user_email_error" class="error"></div>
-                                    <img id="imgsecuri" src="http://localhost/webphp/captcha/three.html" style="margin-bottom: -6px;" _captcha="http://localhost/webphp/captcha/three.html" class="imgrefresh">
-
-                                    <input type="text" class='input' style="width:80px;" id="security_code" placeholder="Mã xác nhận" name="security_code">
-                                    <div name="security_code_error" class="error"></div>
-                                </td>
-                                <td>
-                                    <textarea id="content_comment" cols="50" rows="3" style='width:320px' class='input' placeholder='Nội dung phản hồi' name="content">
-	                    </textarea>
-                                    <div name="content_error" class="error"></div>
-                                    <input type="hidden" name='product_id' value='9'>
-                                    <input type="hidden" name='parent_id' id='comment_parent_id' value=''>
-                                    <input type="submit" class="button button-border medium blue f" id="" value="Gửi" name="_submit">
-                                    <input type="reset" class="button button-border medium red f" value='Nhập lại'>
-                                    <div class='clear'></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-        </div>
-
     </div>
-
 </div>

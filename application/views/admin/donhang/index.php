@@ -1,3 +1,4 @@
+
 <html>
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -89,6 +90,7 @@
                                     <td>
                                         <span><a href="<?php echo admin_url('donhang/edit/' . $row->MADONHANG) ?>">Edit</a></span>
                                         <span><a onclick="if(confirm('Bạn có chắc muốn xóa dữ liệu?')) commentDelete(1); return false" href="<?php echo admin_url('donhang/delete/' . $row->MADONHANG) ?>">Delete</a></span>
+                                        <span><a href="<?php echo admin_url('donhang/OrderDetail/' . $row->MADONHANG) ?>">Detail</a></span>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

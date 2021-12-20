@@ -30,22 +30,9 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="param_PASSWORD" placeholder="Password" name="PASSWORD">
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">RememberMe</label>
-                                            </div>
-                                        </div>
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
                                         <div style="color: red;"><?php echo form_error('Login') ?></div>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -92,21 +92,21 @@ class Sanpham extends MY_Controller
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 } else {
                     // $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới dữ liệu không thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 }
                 //chuyển tới trang danh sách quản trị viên
                 //redirect(admin_url('nguoidung/add'));
             }
         }
         // $message = $this->session->flashdata('message');
-        $this->success_form['temp'] = 'admin/sanpham/add';
-        $this->load->view('admin/main', $this->success_form);
+        $this->data['temp'] = 'admin/sanpham/add';
+        $this->load->view('admin/main', $this->data);
     }
 
     function edit()
@@ -115,7 +115,7 @@ class Sanpham extends MY_Controller
         $this->data['message'] = $message;
         $MASP = $this->uri->rsegment('3');
         $info = $this->Sanpham_model->get_info($MASP);
-       
+        
         if ($info == FALSE) {
             $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">Dữ liệu không tồn tại</div>');
             redirect(admin_url('sanpham/index'));
@@ -204,18 +204,5 @@ class Sanpham extends MY_Controller
     //     redirect(admin_url('login'));
     // }
 
-    function catalog()
-    {
-        $id = intval($this->uri->segment(3));
-        //lay ra info the loai
-        $this->load->model('Danhmuc_model');
-        $catalog = $this->Danhmuc_model->get_info($id);
-        if(!$catalog)
-        {
-            redirect();
-        }
-        //lay ra danh sach san pham thuoc danh muc do
-        pre($catalog);
-    }
 
 }

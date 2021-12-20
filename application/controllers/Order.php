@@ -58,19 +58,37 @@ Class Order extends MY_Controller
             $MESSAGE = $this->input->post('MESSAGE');
             $DIACHI = $this->input->post('DIACHI');
 
-            $data = array(
-                'TINHTRANGTHANHTOAN' => 0,
-                'MANGUOIDUNG' => $user_id,
-                'EMAIL' => $EMAIL,
-                'HOTEN' => $HOTEN,
-                'SDT' => $SDT,
-                'NGAYDAT' => date('y-m-d'),
-                'GHICHU' => $MESSAGE,
-                'DIACHI' => $DIACHI,
-                'AMOUNT' => $total_amount,//tổng số tien cần thanh toán
-                'PAYMENT' => $payment,//cổng thanh toán
-                'CREATED' => now()
-            );
+            if($user == '')
+            {
+                $data = array(
+                    'TINHTRANGTHANHTOAN' => 0,
+                    'EMAIL' => $EMAIL,
+                    'HOTEN' => $HOTEN,
+                    'SDT' => $SDT,
+                    'NGAYDAT' => date('y-m-d'),
+                    'GHICHU' => $MESSAGE,
+                    'DIACHI' => $DIACHI,
+                    'AMOUNT' => $total_amount,//tổng số tien cần thanh toán
+                    'PAYMENT' => $payment,//cổng thanh toán
+                    'CREATED' => now()
+                );
+            }
+            else
+            {
+                $data = array(
+                    'TINHTRANGTHANHTOAN' => 0,
+                    'MANGUOIDUNG' => $user_id,
+                    'EMAIL' => $EMAIL,
+                    'HOTEN' => $HOTEN,
+                    'SDT' => $SDT,
+                    'NGAYDAT' => date('y-m-d'),
+                    'GHICHU' => $MESSAGE,
+                    'DIACHI' => $DIACHI,
+                    'AMOUNT' => $total_amount,//tổng số tien cần thanh toán
+                    'PAYMENT' => $payment,//cổng thanh toán
+                    'CREATED' => now()
+                );
+            } 
 
             //them du lieu vao bang don hang
             $this->Donhang_model->create($data);

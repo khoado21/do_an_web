@@ -7,6 +7,7 @@ class Nguoidung extends MY_Controller
         parent::__construct();
         $this->load->model('Nguoidung_model');
     }
+
     function index()
     {
         $input = array();
@@ -38,118 +39,113 @@ class Nguoidung extends MY_Controller
 
     function add()
     {
+        if (!$this->session->userdata('Admin_id')) {
+            redirect(site_url('Admin/login'));
+        }
+        $user_id = $this->session->userdata('Admin_id');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if (!$user) {
+            redirect();
+        }
+
         if ($this->input->post()) {
             $this->form_validation->set_rules('HOTEN', 'Họ và tên', 'required|min_length[5]');
             $this->form_validation->set_rules('USERNAME', 'Username', 'required|min_length[5]');
-            $this->form_validation->set_rules('PASSWORD', 'Password', 'trim|required|min_length[8]');
-            $this->form_validation->set_rules('PASSCONF', 'Nhập lại mật khẩu', 'trim|matches[PASSWORD]');
-            $this->form_validation->set_rules('EMAIL', 'Email', 'required|callback_check_email');
-            $this->form_validation->set_rules('VAITRO', 'Vai trò', 'required');
-            $this->form_validation->set_rules('MAQUYEN', 'Mã quyền', 'required');
+            $this->form_validation->set_rules('SDT', 'SDT', 'trim|required');
+            $this->form_validation->set_rules('VAITRO', 'Vai trò', 'trim|required');
 
             if ($this->form_validation->run()) {
                 $HOTEN = $this->input->post('HOTEN');
                 $USERNAME = $this->input->post('USERNAME');
-                $PASSWORD = $this->input->post('PASSWORD');
                 $NGAYSINH = $this->input->post('NGAYSINH');
-                $EMAIL = $this->input->post('EMAIL');
-                $NGAYTAO = $this->input->post('NGAYTAO');
-                $NGAYSUA = $this->input->post('NGAYSUA');
                 $VAITRO = $this->input->post('VAITRO');
-                $TRANGTHAI = $this->input->post('TRANGTHAI');
-                $MAQUYEN = $this->input->post('MAQUYEN');
+                $SDT = $this->input->post('SDT');
+                $DIACHI = $this->input->post('DIACHI');
                 $data = array(
                     'HOTEN' => $HOTEN,
                     'USERNAME' => $USERNAME,
-                    'PASSWORD' => $PASSWORD,
                     'NGAYSINH' => $NGAYSINH,
-                    'EMAIL' => $EMAIL,
-                    'NGAYTAO' => $NGAYTAO,
-                    'NGAYSUA' => $NGAYSUA,
-                    'VAITRO' => $VAITRO,
-                    'TRANGTHAI' => $TRANGTHAI,
-                    'MAQUYEN' => $MAQUYEN
+                    'SDT' => $SDT,
+                    'DIACHI' => $DIACHI,
+                    'VAITRO' => $VAITRO
                 );
 
                 //tạo nội dung thông báo
                 if ($this->Nguoidung_model->create($data)) {
-                    // $this->session->set_flashdata('message', 'Thêm mới dữ liệu thành công');
-                    $message = '<div class="alert alert-primary" id="alert" role="alert">
-                                    Thêm mới dữ liệu thành công
-                                </div>';
-                    $this->success_form['message'] = $message;
+                    $this->session->set_flashdata('message', 'Thêm mới dữ liệu thành công');
+                    // $message = '<div class="alert alert-primary" id="alert" role="alert">
+                    //                 Thêm mới dữ liệu thành công
+                    //             </div>';
+                    // $this->success_form['message'] = $message;
                 } else {
-                    // $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
-                    $message = '<div class="alert alert-primary" id="alert" role="alert">
-                                    Thêm mới dữ liệu không thành công
-                                </div>';
-                    $this->success_form['message'] = $message;
+                    $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
+                    // $message = '<div class="alert alert-primary" id="alert" role="alert">
+                    //                 Thêm mới dữ liệu không thành công
+                    //             </div>';
+                    // $this->success_form['message'] = $message;
                 }
                 //chuyển tới trang danh sách quản trị viên
                 //redirect(admin_url('nguoidung/add'));
+                $message = $this->session->flashdata('message');
+                $this->data['message'] = $message;
             }
         }
-        // $message = $this->session->flashdata('message');
-        $this->success_form['temp'] = 'admin/nguoidung/add';
-        $this->load->view('admin/main', $this->success_form);
+        
+        $this->data['temp'] = 'admin/nguoidung/add';
+        $this->load->view('admin/main', $this->data);
     }
 
     function edit()
     {
-        $message = '';
-        $this->data['message'] = $message;
-        $MANGUOIDUNG = $this->uri->rsegment('3');
-        $info = $this->Nguoidung_model->get_info($MANGUOIDUNG);
-        if ($info == FALSE) {
-            $this->session->set_flashdata('alert', '<div class="alert alert-danger" role="alert">Người dùng không tồn tại</div>');
-            redirect(admin_url('nguoidung/index'));
-        } else {
-            $this->data['info'] = $info;
+        if (!$this->session->userdata('Admin_id')) {
+            redirect(site_url('Admin/login'));
+        }
+        $user_id = $this->session->userdata('Admin_id');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if (!$user) {
+            redirect();
+        }
 
-            if ($this->input->post()) {
-                $this->form_validation->set_rules('HOTEN', 'Họ và tên', 'required|min_length[5]');
-                $this->form_validation->set_rules('USERNAME', 'Username', 'required|min_length[5]');
-                $this->form_validation->set_rules('PASSWORD', 'Password', 'trim|required|min_length[8]');
-                $this->form_validation->set_rules('VAITRO', 'Vai trò', 'required');
-                $this->form_validation->set_rules('MAQUYEN', 'Mã quyền', 'required');
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('HOTEN', 'Họ và tên', 'required|min_length[5]');
+            $this->form_validation->set_rules('USERNAME', 'Username', 'required|min_length[5]');
+            $this->form_validation->set_rules('VAITRO', 'Vai trò', 'required');
 
-                if ($this->form_validation->run()) {
-                    $HOTEN = $this->input->post('HOTEN');
-                    $USERNAME = $this->input->post('USERNAME');
-                    $PASSWORD = $this->input->post('PASSWORD');
-                    $NGAYSINH = $this->input->post('NGAYSINH');
-                    $NGAYSUA = date('Y-m-d');
-                    $VAITRO = $this->input->post('VAITRO');
-                    $MAQUYEN = $this->input->post('MAQUYEN');
-                    if ($PASSWORD == $this->data['info']->PASSWORD  && $this->form_validation->run() == TRUE) {
-                        $data = array(
-                            'HOTEN' => $HOTEN,
-                            'USERNAME' => $USERNAME,
-                            'NGAYSINH' => $NGAYSINH,
-                            'NGAYSUA' => $NGAYSUA,
-                            'VAITRO' => $VAITRO,
-                            'MAQUYEN' => $MAQUYEN
-                        );
-                        if ($this->Nguoidung_model->update($MANGUOIDUNG, $data)) {
-                            $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Cập nhật dữ liệu thành công</div>');
-                            // $message = '<div class="alert alert-primary" id="alert" role="alert">Cập nhật dữ liệu thành công</div>';
-                            // $this->success_form['message'] = $message;
-                        } else {
-                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Cập nhật dữ liệu không thành công</div>');
-                            // $message = '<div class="alert alert-danger" role="alert">Cập nhật dữ liệu không thành công</div>';
-                            // $this->success_form['message'] = $message;
-                        }
-                    } else if ($PASSWORD != $this->data['info']->PASSWORD) {
-                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Xác nhận mật khẩu thất bại</div>');
-                        // $message = '<div class="alert alert-danger" role="alert">Xác nhận mật khẩu thất bại</div>';
+            if ($this->form_validation->run()) {
+                $HOTEN = $this->input->post('HOTEN');
+                $USERNAME = $this->input->post('USERNAME');
+                $NGAYSINH = $this->input->post('NGAYSINH');
+                $NGAYSUA = date('Y-m-d');
+                $SDT = $this->input->post('SDT');
+                $DIACHI = $this->input->post('DIACHI');
+                $VAITRO = $this->input->post('VAITRO');
+                    $data = array(
+                        'HOTEN' => $HOTEN,
+                        'USERNAME' => $USERNAME,
+                        'NGAYSINH' => $NGAYSINH,
+                        'NGAYSUA' => $NGAYSUA,
+                        'SDT' => $SDT,
+                        'DIACHI' => $DIACHI,
+                        'VAITRO' => $VAITRO,
+                    );
+
+                    if ($this->Nguoidung_model->update($user->MANGUOIDUNG, $data)) {
+                        $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Cập nhật dữ liệu thành công</div>');
+                        // $message = '<div class="alert alert-primary" id="alert" role="alert">Cập nhật dữ liệu thành công</div>';
+                        // $this->success_form['message'] = $message;
+                    } else {
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Cập nhật dữ liệu không thành công</div>');
+                        // $message = '<div class="alert alert-danger" role="alert">Cập nhật dữ liệu không thành công</div>';
                         // $this->success_form['message'] = $message;
                     }
-                    $message = $this->session->flashdata('message');
-                    $this->data['message'] = $message;
-                    
-                }
             }
-        }
+            else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Nhập dữ liệu không thành công</div>');
+            }
+        } 
+        $this->data['message'] = $this->session->flashdata('message');
+
+        $this->data['user'] = $user;
         $this->data['temp'] = 'admin/nguoidung/edit';
         $this->load->view('admin/main', $this->data);
     }
@@ -161,13 +157,10 @@ class Nguoidung extends MY_Controller
         $this->success_form['message'] = $message;
         $MANGUOIDUNG = $this->uri->rsegment('3');
         $info = $this->Nguoidung_model->get_info($MANGUOIDUNG);
-        if ($info == FALSE)
-        {
+        if ($info == FALSE) {
             $message = '<div class="alert alert-danger" role="alert">Người dùng không tồn tại</div>';
             $this->success_form['message'] = $message;
-        } 
-        else 
-        {
+        } else {
             //thực hiện xóa
             $this->Nguoidung_model->delete($MANGUOIDUNG);
             $this->session->set_flashdata('alert', '<div class="alert alert-primary" role="alert">Xóa dữ liệu thành công</div>');
@@ -178,8 +171,7 @@ class Nguoidung extends MY_Controller
     //thực hiện đăng xuất
     function logout()
     {
-        if($this->session->userdata('Login'))
-        {
+        if ($this->session->userdata('Login')) {
             $this->session->unset_userdata('Login');
         }
         redirect(admin_url('login'));
@@ -187,20 +179,18 @@ class Nguoidung extends MY_Controller
 
     function changePassword()
     {
-        if(!$this->session->userdata('Nguoidung_id_Login'))
-        {
+        if (!$this->session->userdata('Nguoidung_id_Login')) {
             redirect(admin_url('login'));
         }
         //lay thong tin thanh vien
         $user_id = $this->session->userdata('Nguoidung_id_Login');
         $user = $this->Nguoidung_model->get_info($user_id);
 
-        if(!$user)
-        {
+        if (!$user) {
             redirect();
         }
 
-        if ($this->input->post()) {            
+        if ($this->input->post()) {
             $this->form_validation->set_rules('PASSWORD', 'Mật khẩu cũ', 'trim|required|min_length[8]');
             $this->form_validation->set_rules('NEWPASS', 'Mật khẩu mới', 'trim|required|min_length[8]');
             $this->form_validation->set_rules('NEWPASSCONF', 'Xác nhận mật khẩu mới', 'trim|matches[NEWPASS]');
@@ -236,13 +226,20 @@ class Nguoidung extends MY_Controller
         $this->load->view('admin/main', $this->data);
     }
 
-    private function _get_user_info()
+    function Profile()
     {
-        $EMAIL = $this->input->post('EMAIL');
-        $PASSWORD = $this->input->post('PASSWORD');
-        
-        $where = array('EMAIL' => $EMAIL, 'PASSWORD' => $PASSWORD);
-        $user = $this->Nguoidung_model->get_info_rule($where);
-        return $user;
+        if (!$this->session->userdata('Admin_id')) {
+            redirect(site_url('Admin/login'));
+        }
+        $user_id = $this->session->userdata('Admin_id');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if (!$user) {
+            redirect();
+        }
+
+        $this->data['user'] = $user;
+
+        $this->data['temp'] = 'admin/Nguoidung/Profile';
+        $this->load->view('admin/main', $this->data);
     }
 }

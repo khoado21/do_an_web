@@ -35,7 +35,7 @@
         <ul class="news">
             <?php foreach($tintuc as $row): ?>
             <li>
-                <a href="news/view/4.html" title="<?php echo $row->TIEUDE ?>">
+                <a href="<?php echo site_url('Tintuc/view/').$row->MATINTUC ?>" title="<?php echo $row->TIEUDE ?>">
                 <?php echo $row->TIEUDE ?> </a>
             </li>
             <?php endforeach; ?>

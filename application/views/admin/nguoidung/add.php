@@ -12,14 +12,16 @@
 <div id="wrapper">
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        <?php if (isset($message)) : ?>
             <?php echo $message; ?>
+        <?php endif; ?>
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Thêm mới người dùng</h1>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
                 <div class="table-responsive">
-                    <form style="overflow: hidden;" action="" method="POST" enctype="multipart/form-data">
+                    <form style="overflow: hidden;" action="<?php echo admin_url('nguoidung/add') ?>" method="POST" enctype="multipart/form-data">
                         <div class="mb-3 row" style="margin-top: 10px;">
                             <label for="param_HOTEN" class="col-sm-2 col-form-label">Họ và tên<span style="color:red">*</span></label>
                             <div class="col-sm-10">

@@ -35,7 +35,7 @@ $this->load->view('site/slide');
             </center> -->
             <div class="action">
                 <p style="float:left;margin-left:10px">Lượt xem: <b><?php echo $row->LUOTXEM ?></b></p>
-                <a class="button" href="them-vao-gio-9.html" title="Mua ngay">Mua ngay</a>
+                <a class="button" href="<?php echo base_url('cart/add/'.$row->MASP) ?>" title="Mua ngay">Mua ngay</a>
                 <div class="clear"></div>
             </div>  
         </div> 
@@ -74,7 +74,7 @@ $this->load->view('site/slide');
             </center> -->
             <div class="action">
                 <p style="float:left;margin-left:10px">Lượt xem: <b><?php echo $row->LUOTXEM ?></b></p>
-                <a class="button" href="them-vao-gio-9.html" title="Mua ngay">Mua ngay</a>
+                <a class="button" href="<?php echo base_url('cart/add/'.$row->MASP) ?>" title="Mua ngay">Mua ngay</a>
                 <div class="clear"></div>
             </div>  
         </div> 

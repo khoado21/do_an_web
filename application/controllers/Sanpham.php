@@ -8,6 +8,36 @@ Class Sanpham extends My_Controller
         $this->load->helper(array('form', 'url'));
     }
 
+    function index()
+    {
+        $input = array();
+        $total_row = $this->Sanpham_model->get_total($input);
+        $this->data['total_rows'] = $total_row;
+
+        //thu vien phan trang
+        $this->load->library('pagination');
+        $config = array();
+        $config['total_rows'] = $total_row; //tong tat ca sp trong website
+        $config['base_url'] = base_url('sanpham/index/'); //link hien thi ra danh sach sp
+        $config['per_page'] = 4; //so luong san pham hien thi trong 1 trang
+        $config['uri_segment'] = 3; //phan doan hien thi ra so trang tren url
+        $config['next_link'] = 'Next';
+        $config['prev_link'] = 'Previous';
+        //khởi tạo cấu hình phân trang
+        $this->pagination->initialize($config);
+
+        $segment = $this->uri->segment(3);
+        $segment = intval($segment);
+
+        $input['limit'] = array($config['per_page'], $segment);
+
+        $sanpham = $this->Sanpham_model->get_list($input);
+        $this->data['sanpham'] = $sanpham;
+
+        $this->data['temp'] = 'site/Sanpham/index';
+        $this->load->view('site/layout', $this->data);
+    }
+
     function catalog()
     {
         $id = intval($this->uri->segment(3));
@@ -32,7 +62,7 @@ Class Sanpham extends My_Controller
         $config = array();
         $config['total_rows'] = $total_row; //tong tat ca sp trong website
         $config['base_url'] = base_url('sanpham/catalog/'.$id); //link hien thi ra danh sach sp
-        $config['per_page'] = 15; //so luong san pham hien thi trong 1 trang
+        $config['per_page'] = 6; //so luong san pham hien thi trong 1 trang
         $config['uri_segment'] = 4; //phan doan hien thi ra so trang tren url
         $config['next_link'] = 'Next';
         $config['prev_link'] = 'Previous';

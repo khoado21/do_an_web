@@ -51,7 +51,7 @@
 <div class="box-center">
     <!-- The box-center product-->
     <div class="tittle-box-center">
-        <h2>Thông tin giỏ hàng (Có <?php echo $total_items ?> sản phẩm) </h2>
+        <h2>Chi tiết đơn hàng</h2>
     </div>
 
     <div class="box-content-center product">

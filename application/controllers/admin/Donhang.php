@@ -6,6 +6,8 @@ class Donhang extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Donhang_model');
+        $this->load->model('Ctdh_model');
+        $this->load->model('Sanpham_model');
     }
     function index()
     {
@@ -97,22 +99,21 @@ class Donhang extends MY_Controller
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới đơn hàng thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 } else {
                     // $this->session->set_flashdata('message', 'Thêm mới dữ liệu không thành công');
                     $message = '<div class="alert alert-primary" id="alert" role="alert">
                                     Thêm mới đơn hàng không thành công
                                 </div>';
-                    $this->success_form['message'] = $message;
+                    $this->data['message'] = $message;
                 }
                 //chuyển tới trang danh sách quản trị viên
-                $this->success_form['temp'] = 'admin/donhang/add';
                 //redirect(admin_url('ctdh/add'));
             }
         }
         // $message = $this->session->flashdata('message');
-        $this->success_form['temp'] = 'admin/donhang/add';
-        $this->load->view('admin/main', $this->success_form);
+        $this->data['temp'] = 'admin/donhang/add';
+        $this->load->view('admin/main', $this->data);
     }
 
     function edit()
@@ -212,5 +213,41 @@ class Donhang extends MY_Controller
             $this->session->set_flashdata('alert', '<div class="alert alert-primary" role="alert">Xóa dữ liệu thành công</div>');
         }
         redirect('admin/Donhang/index');
+    }
+
+    function OrderDetail()
+    {
+        if(!$this->session->userdata('Admin_id'))
+        {
+            redirect(admin_url('Nguoidung/login'));
+        }
+        $user_id = $this->session->userdata('Admin_id');
+        $user = $this->Nguoidung_model->get_info($user_id);
+        if(!$user)
+        {
+            redirect();
+        }
+
+        //lấy thông tin chi tiết đơn hàng
+        $order_id = $this->uri->rsegment(3);
+        $input['where'] = array('MADONHANG' => $order_id);
+        $list_ctdh = $this->Ctdh_model->get_list($input);
+
+        //lấy thông tin sản phẩm trong chi tiết đơn hàng
+        $ctsp = array();
+        $stt = 0; //số thứ tự sản phẩm
+        foreach($list_ctdh as $list)
+        {
+            $MASP = $list->MASP;
+            $Sanpham = $this->Sanpham_model->get_info($MASP);
+            $list_ctdh[$stt]->TENSP = $Sanpham->TENSP;
+            $list_ctdh[$stt]->HINHANH = $Sanpham->HINHANH;
+            $stt++;
+        }
+        $this->data['list_ctdh'] = $list_ctdh;
+        
+        //load view
+        $this->data['temp'] = 'admin/donhang/OrderDetail';
+        $this->load->view('admin/main', $this->data);
     }
 }

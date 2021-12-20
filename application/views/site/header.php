@@ -47,8 +47,8 @@
     <!-- the menu -->
     <ul class="menu_top">
         <li class="active index-li"><a href="<?php echo base_url() ?>">Trang chủ </a></li>
-        <li class=""><a href="san-pham.html">Sản phẩm</a></li>
-        <li class=""><a href="tin-tuc.html">Tin tức</a></li>
+        <li class=""><a href="<?php echo site_url('Sanpham/index') ?>">Sản phẩm</a></li>
+        <li class=""><a href="<?php echo site_url('Tintuc/index') ?>">Tin tức</a></li>
         <?php if(isset($user_info)): ?>
             <li class="">Xin chào <a href="<?php echo site_url('Nguoidung/Profile') ?>"><?php echo $user_info->USERNAME ?></a></li>
             <li class=""><a href="<?php echo site_url('Nguoidung/logout') ?>">Đăng xuất</a></li>

@@ -15,7 +15,9 @@
 <div id="wrapper">
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <?php echo $message; ?>
+    <?php if(isset($message)): ?>
+            <?php echo $message; ?>
+        <?php endif; ?>
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Thêm mới danh mục bình luận</h1>
         <!-- DataTales Example -->
