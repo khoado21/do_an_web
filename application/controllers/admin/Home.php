@@ -14,7 +14,8 @@ class Home extends MY_Controller
     {
         //lấy tháng hiện tại
         $CurrentMonth = date('m');
-
+        //lấy năm hiện tại
+        $CurrentYear = date('y');
         //lấy từng tháng
         $jan = 1;
         $feb = 2;
@@ -75,55 +76,57 @@ class Home extends MY_Controller
         foreach ($all_list as $list_total) {
             $originalDate = $list_total->NGAYDAT;
             $newDate = date("m", strtotime($originalDate));
+            $newYear = date("y", strtotime($originalDate));
             //kiểm tra tình trạng thanh toán trước khi cộng vào doanh thu từng tháng
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jan) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jan && $newYear == $CurrentYear) {
                 $total_jan_amount = $total_jan_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $feb) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $feb && $newYear == $CurrentYear) {
                 $total_feb_amount = $total_feb_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $mar) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $mar && $newYear == $CurrentYear) {
                 $total_mar_amount = $total_mar_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $apr) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $apr && $newYear == $CurrentYear) {
                 $total_apr_amount = $total_apr_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $may) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $may && $newYear == $CurrentYear) {
                 $total_may_amount = $total_may_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jun) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jun && $newYear == $CurrentYear) {
                 $total_jun_amount = $total_jun_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jul) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $jul && $newYear == $CurrentYear) {
                 $total_jul_amount = $total_jul_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $aug) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $aug && $newYear == $CurrentYear) {
                 $total_aug_amount = $total_aug_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $sep) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $sep && $newYear == $CurrentYear) {
                 $total_sep_amount = $total_sep_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $oct) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $oct && $newYear == $CurrentYear) {
                 $total_oct_amount = $total_oct_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $nov) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $nov && $newYear == $CurrentYear) {
                 $total_nov_amount = $total_nov_amount + $list_total->AMOUNT;
             }
 
-            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $dec) {
+            if ($list_total->TINHTRANGTHANHTOAN == 1 && $newDate == $dec && $newYear == $CurrentYear) {
                 $total_dec_amount = $total_dec_amount + $list_total->AMOUNT;
             }
         }
+        $total_year_amount = $total_jan_amount + $total_feb_amount + $total_mar_amount + $total_apr_amount + $total_may_amount + $total_jun_amount + $total_jul_amount + $total_aug_amount + $total_sep_amount + $total_oct_amount + $total_nov_amount + $total_dec_amount;
         //<editor-data>
         $this->data['total_jan_amount'] = $total_jan_amount;
         $this->data['total_feb_amount'] = $total_feb_amount;
@@ -137,6 +140,7 @@ class Home extends MY_Controller
         $this->data['total_oct_amount'] = $total_oct_amount;
         $this->data['total_nov_amount'] = $total_nov_amount;
         $this->data['total_dec_amount'] = $total_dec_amount;
+        $this->data['total_year_amount'] = $total_year_amount;
         //</editor-data>
 
         //tạo biến lấy tổng doanh thu của đơn hàng trong tháng
@@ -170,6 +174,20 @@ class Home extends MY_Controller
         $this->data['dathanhtoan'] = $dathanhtoan;
         $this->data['$thatbai'] = $thatbai;
         $this->data['chuathanhtoan'] = $chuathanhtoan;
+
+        //lấy số lượng người dùng đã đăng kí trên website
+        $this->load->model('Nguoidung_model');
+        $input = array();
+        $account_list = $this->Nguoidung_model->get_list($input);
+        $account_total = 0;
+        foreach($account_list as $account)
+        {
+            if($account->MAQUYEN == 3)
+            {
+                $account_total++;
+            }
+        }
+        $this->data['account_total'] = $account_total;
 
         //gửi data sang view
         $this->data['temp'] = 'admin/home/index';

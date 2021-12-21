@@ -32,14 +32,13 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Danh mục quản lý</span>
+        <span>Quản lý người dùng</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý người dùng</h6>
             <a class="collapse-item" href="<?php echo admin_url('vaitronguoidung') ?>">Vai trò người dùng</a>
             <a class="collapse-item" href="<?php echo admin_url('nguoidung') ?>">Người dùng</a>
-            <h6 class="collapse-header">Quản lý sản phẩm</h6>
+            <!-- <h6 class="collapse-header">Quản lý sản phẩm</h6>
             <a class="collapse-item" href="<?php echo admin_url('nhacungcap') ?>">Nhà cung cấp</a>
             <a class="collapse-item" href="<?php echo admin_url('thuonghieu') ?>">Thương hiệu</a>
             <a class="collapse-item" href="<?php echo admin_url('danhmuc') ?>">Danh mục sản phẩm</a>
@@ -53,6 +52,49 @@
             <a class="collapse-item" href="<?php echo admin_url('tintuc') ?>">Tin tức</a>
             <a class="collapse-item" href="<?php echo admin_url('binhluan') ?>">Bình luận</a>
             <a class="collapse-item" href="<?php echo admin_url('voucher') ?>">Voucher</a>
+            <a class="collapse-item" href="<?php echo admin_url('contact') ?>">Contact</a> -->
+        </div>
+    </div>
+
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Quản lý sản phẩm</span>
+    </a>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?php echo admin_url('nhacungcap') ?>">Nhà cung cấp</a>
+            <a class="collapse-item" href="<?php echo admin_url('thuonghieu') ?>">Thương hiệu</a>
+            <a class="collapse-item" href="<?php echo admin_url('danhmuc') ?>">Danh mục sản phẩm</a>
+            <a class="collapse-item" href="<?php echo admin_url('sanpham') ?>">Sản phẩm</a>
+            <a class="collapse-item" href="<?php echo admin_url('hinhanh') ?>">Hình ảnh sản phẩm</a>                   
+        </div>
+    </div>
+
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Quản lý đơn hàng</span>
+    </a>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">                 
+            <h6 class="collapse-header">Quản lý đơn hàng</h6>
+            <a class="collapse-item" href="<?php echo admin_url('donhang') ?>">Đơn hàng</a>
+            <a class="collapse-item" href="<?php echo admin_url('ctdh') ?>">Chi tiết đơn hàng</a>
+            <a class="collapse-item" href="<?php echo admin_url('giaohang') ?>">Giao hàng</a>
+        </div>
+    </div>
+
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Khác</span>
+    </a>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?php echo admin_url('tintuc') ?>">Tin tức</a>
+            <a class="collapse-item" href="<?php echo admin_url('binhluan') ?>">Bình luận</a>
+            <a class="collapse-item" href="<?php echo admin_url('voucher') ?>">Voucher</a>
             <a class="collapse-item" href="<?php echo admin_url('contact') ?>">Contact</a>
         </div>
     </div>
@@ -62,12 +104,12 @@
 <hr class="sidebar-divider">
 
 <!-- Heading -->
-<div class="sidebar-heading">
+<!-- <div class="sidebar-heading">
     Addons
-</div>
+</div> -->
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fas fa-fw fa-folder"></i>
@@ -85,24 +127,24 @@
             <a class="collapse-item" href="blank.html">Blank Page</a>
         </div>
     </div>
-</li>
+</li> -->
 
 <!-- Nav Item - Charts -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link" href="charts.html">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Charts</span></a>
-</li>
+</li> -->
 
 <!-- Nav Item - Tables -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
         <span>Tables</span></a>
-</li>
+</li> -->
 
 <!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
+<!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">
