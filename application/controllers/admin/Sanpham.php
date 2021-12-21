@@ -135,12 +135,21 @@ class Sanpham extends MY_Controller
                     $TENSP = $this->input->post('TENSP');
                     $MATHUONGHIEU = $this->input->post('MATHUONGHIEU');
                     $MADM = $this->input->post('MADM');
+                    if(!empty($this->input->post('GIAKM')))
+                    {
+                        $GIAKM = NULL;
+                    }
+                    else
+                    {
+                        $GIAKM = $this->input->post('GIAKM');
+                    }
                     $DONGIA = $this->input->post('DONGIA');
                     $TINHTRANGSP = $this->input->post('TINHTRANGSP');
                     $NGAYDANG = date('Y-m-d');
                     $SOLUONG = $this->input->post('SOLUONG');
                     if ($this->form_validation->run()) {
                         $data = array(
+                            'GIAKM' => $GIAKM,
                             'TENSP' => $TENSP,
                             'MADM' => $MADM,
                             'MATHUONGHIEU' => $MATHUONGHIEU,
