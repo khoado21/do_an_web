@@ -19,7 +19,7 @@ Class Sanpham extends My_Controller
         $config = array();
         $config['total_rows'] = $total_row; //tong tat ca sp trong website
         $config['base_url'] = base_url('sanpham/index/'); //link hien thi ra danh sach sp
-        $config['per_page'] = 4; //so luong san pham hien thi trong 1 trang
+        $config['per_page'] = 6; //so luong san pham hien thi trong 1 trang
         $config['uri_segment'] = 3; //phan doan hien thi ra so trang tren url
         $config['next_link'] = 'Next';
         $config['prev_link'] = 'Previous';

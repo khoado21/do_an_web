@@ -64,7 +64,12 @@ class Sanpham extends MY_Controller
             $this->form_validation->set_rules('TINHTRANGSP', 'Tình trạng', 'required');          
             if ($this->form_validation->run()) {  
                 $this->do_upload();
-                $this->upload->do_upload('HINHANH');     
+                $this->upload->do_upload('HINHANH');
+                if(empty($this->input->post('GIAKM'))){
+                    $GIAKM = NUll;
+                }else {
+                    $GIAKM = $this->input->post('GIAKM');
+                }     
                 $TENSP = $this->input->post('TENSP');
                 $MATHUONGHIEU = $this->input->post('MATHUONGHIEU');
                 $MADM = $this->input->post('MADM');
@@ -76,6 +81,7 @@ class Sanpham extends MY_Controller
                 $HINHANH = $this->upload->data();
                 $data = array(
                     'TENSP' => $TENSP,
+                    'GIAKM' => $GIAKM,
                     'MATHUONGHIEU' => $MATHUONGHIEU,
                     'MADM' => $MADM,
                     'DONGIA' => $DONGIA,
@@ -131,7 +137,11 @@ class Sanpham extends MY_Controller
                     {
                         $HINHANH['file_name'] = $info->HINHANH;
                     }  
-
+                    if(empty($this->input->post('GIAKM'))){
+                        $GIAKM = NUll;
+                    }else {
+                        $GIAKM = $this->input->post('GIAKM');
+                    }  
                     $TENSP = $this->input->post('TENSP');
                     $MATHUONGHIEU = $this->input->post('MATHUONGHIEU');
                     $MADM = $this->input->post('MADM');
@@ -142,6 +152,7 @@ class Sanpham extends MY_Controller
                     if ($this->form_validation->run()) {
                         $data = array(
                             'TENSP' => $TENSP,
+                            'GIAKM' => $GIAKM,
                             'MADM' => $MADM,
                             'MATHUONGHIEU' => $MATHUONGHIEU,
                             'DONGIA' => $DONGIA,

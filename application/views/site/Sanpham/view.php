@@ -27,7 +27,7 @@
 </script>
 
 <!-- zoom image -->
-<script type='text/javascript' src='<?php echo public_url() ?>/site/js/jquery-1.6.js'></script>
+<script type='text/javascript' src='<?php echo public_url() ?>/site/jqzoom_ev/js/jquery-1.6.js'></script>
 <script src="<?php echo public_url() ?>/site/jqzoom_ev/js/jquery.jqzoom-core.js" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php echo public_url() ?>/site/jqzoom_ev/css/jquery.jqzoom.css" type="text/css">
 <script type="text/javascript">
