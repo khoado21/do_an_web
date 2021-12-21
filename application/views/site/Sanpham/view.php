@@ -97,9 +97,7 @@
                         </a>
                     </li>
                     <?php foreach ($image_list as $image) : ?>
-                        <?php if ($image->LINKANH == '') : ?>
-                            <?php continue; ?>
-                        <?php else : ?>
+                        <?php if (!empty($image->LINKANH)) : ?>
                             <li>
                                 <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?php echo public_url('image/') . $image->LINKANH ?>',largeimage: '<?php echo public_url('image/') . $image->LINKANH ?>'}">
                                     <img src='<?php echo public_url('image/') . $image->LINKANH ?>'>

@@ -39,6 +39,14 @@
                         </div>
 
                         <div class="mb-3 row">
+                            <label for="param_USERNAME" class="col-sm-2 col-form-label">SDT<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="param_USERNAME" name="SDT" value="<?php echo set_value('SDT'); ?>">
+                            </div>
+                            <div class="name_error"> <?php echo form_error('SDT'); ?></div>
+                        </div>
+
+                        <div class="mb-3 row">
                             <label for="param_PASSWORD" class="col-sm-2 col-form-label">Password<span style="color:red">*</span></label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" id="param_PASSWORD" name="PASSWORD">

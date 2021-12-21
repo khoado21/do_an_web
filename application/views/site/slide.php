@@ -50,9 +50,9 @@
 <div id='slide'>
     <div id="img-slide" class="sliderContainer" style='width:580px'>
         <div id="HomeSlide" class="royalSlider rsMinW">
-            <a href="http://dantri.com.vn/" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/hamster.jpg" /> </a>
-            <a href="http://dantri.com.vn/" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/hamster.jpg" /> </a>
-            <a href="http://dantri.com.vn/" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/hamster.jpg" /> </a>
+            <a href="#" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/11.jpg"/></a>
+            <a href="#" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/21.jpg"/></a>
+            <a href="#" target='_blank'><img style="width: 580px; height: 205px;" src="<?php echo public_url()?>upload/slide/31.jpg"/></a>
         </div>
     </div>
     <div class="clear"></div>

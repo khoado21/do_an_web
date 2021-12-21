@@ -53,20 +53,31 @@ class Nguoidung extends MY_Controller
             $this->form_validation->set_rules('USERNAME', 'Username', 'required|min_length[5]');
             $this->form_validation->set_rules('SDT', 'SDT', 'trim|required');
             $this->form_validation->set_rules('VAITRO', 'Vai trò', 'trim|required');
+            $this->form_validation->set_rules('PASSWORD', 'Password', 'trim|required|min_length[8]');
+            $this->form_validation->set_rules('PASSCONF', 'Nhập lại mật khẩu', 'trim|matches[PASSWORD]');
+            $this->form_validation->set_rules('EMAIL', 'Email đăng nhập', 'required|callback_check_email');
 
             if ($this->form_validation->run()) {
                 $HOTEN = $this->input->post('HOTEN');
+                $EMAIL = $this->input->post('EMAIL');
                 $USERNAME = $this->input->post('USERNAME');
                 $NGAYSINH = $this->input->post('NGAYSINH');
                 $VAITRO = $this->input->post('VAITRO');
                 $SDT = $this->input->post('SDT');
                 $DIACHI = $this->input->post('DIACHI');
+                $MAQUYEN = $this->input->post('MAQUYEN');
+                $PASSWORD = $this->input->post('PASSWORD');
+                $NGAYTAO = date('y-m-d');
                 $data = array(
+                    'EMAIL ' => $EMAIL,
+                    'PASSWORD ' => $PASSWORD,
                     'HOTEN' => $HOTEN,
                     'USERNAME' => $USERNAME,
                     'NGAYSINH' => $NGAYSINH,
                     'SDT' => $SDT,
                     'DIACHI' => $DIACHI,
+                    'MAQUYEN' => $MAQUYEN,
+                    'NGAYTAO' => $NGAYTAO,
                     'VAITRO' => $VAITRO
                 );
 
@@ -115,18 +126,18 @@ class Nguoidung extends MY_Controller
                 $HOTEN = $this->input->post('HOTEN');
                 $USERNAME = $this->input->post('USERNAME');
                 $NGAYSINH = $this->input->post('NGAYSINH');
-                $NGAYSUA = date('Y-m-d');
+                $VAITRO = $this->input->post('VAITRO');
                 $SDT = $this->input->post('SDT');
                 $DIACHI = $this->input->post('DIACHI');
-                $VAITRO = $this->input->post('VAITRO');
+                $MAQUYEN = $this->input->post('MAQUYEN');
                     $data = array(
                         'HOTEN' => $HOTEN,
                         'USERNAME' => $USERNAME,
                         'NGAYSINH' => $NGAYSINH,
-                        'NGAYSUA' => $NGAYSUA,
                         'SDT' => $SDT,
                         'DIACHI' => $DIACHI,
-                        'VAITRO' => $VAITRO,
+                        'MAQUYEN' => $MAQUYEN,
+                        'VAITRO' => $VAITRO
                     );
 
                     if ($this->Nguoidung_model->update($user->MANGUOIDUNG, $data)) {
