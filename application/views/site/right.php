@@ -6,7 +6,7 @@
     <div class="content-box">
         <!-- goi ra phuong thuc hien thi danh sach ho tro -->
         <div class="support">
-            <strong>Hoang van tuyen </strong>
+            <strong>Do Le Anh Khoa </strong>
 
             <p>
                 <img style="margin-bottom:-3px" src="<?php echo public_url() ?>/site/images/phone.png"> 01686039488
