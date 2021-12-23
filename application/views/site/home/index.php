@@ -22,7 +22,11 @@ $this->load->view('site/slide');
                 </a>
             </div>
             <p class="price">
-                5,400,000 đ
+            <?php if ($row->GIAKM > 0) : ?>
+                        <?php echo $row->GIAKM ?> đ<span class='price_old'><?php echo $row->DONGIA ?></span>
+                    <?php else : ?>
+                        <?php echo $row->DONGIA ?>đ
+                    <?php endif;  ?>
             </p>
             <!-- <center>
                 <div class="raty" style="margin: 10px 0px; width: 100px;" id="9" data-score="4" title="good">
