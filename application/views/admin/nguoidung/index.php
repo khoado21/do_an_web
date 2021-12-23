@@ -29,7 +29,9 @@
                                 <th>Ngày sửa</th>
                                 <th>Vai trò</th>
                                 <th>Mã đánh giá</th>
+                                <?php if($Admin_info->MANGUOIDUNG == 1): ?>
                                 <th>Action</th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tfoot>
@@ -42,7 +44,9 @@
                                 <th>Ngày sửa</th>
                                 <th>Vai trò</th>
                                 <th>Mã đánh giá</th>
+                                <?php if($Admin_info->MANGUOIDUNG == 1): ?>
                                 <th>Action</th>
+                                <?php endif;?>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -56,10 +60,12 @@
                                     <td><?php echo $row->NGAYSUA ?></td>
                                     <td><?php echo $row->VAITRO ?></td>
                                     <td><?php echo $row->MADANHGIA ?></td>
+                                    <?php if($Admin_info->MANGUOIDUNG == 1): ?>
                                     <td>
                                     <span><a href="<?php echo admin_url('nguoidung/edit/' . $row->MANGUOIDUNG) ?>">Edit</a></span>
                                     <span><a onclick="if(confirm('Bạn có chắc muốn xóa dữ liệu?')) commentDelete(1); return false" href="<?php echo admin_url('nguoidung/delete/' . $row->MANGUOIDUNG) ?>">Delete</a></span>
                                     </td>
+                                    <?php endif;?>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>

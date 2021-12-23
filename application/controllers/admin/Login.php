@@ -29,7 +29,7 @@ Class Login extends MY_Controller
         if($this->Nguoidung_model->check_exists($where))
         {
             $MAQUYEN = $this->Nguoidung_model->get_info_rule($where, $field = 'MAQUYEN');
-            if($MAQUYEN->MAQUYEN == 1)
+            if($MAQUYEN->MAQUYEN == 1 || $MAQUYEN->MAQUYEN == 2)
             {
                 return true;
             }
